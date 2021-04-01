@@ -1,0 +1,47 @@
+{
+  "name": "TeamWork",
+  "version": "1.0.1",
+  "description": "Managment of TeamWork",
+  "main": "index.js",
+  "scripts": {
+    "dev-start": " nodemon --exec babel-node ./server/server.js",
+    "prod-start": "SET NODE_ENV=production& nodemon --exec babel-node ./server/server.js",
+    "start": " babel-node ./server/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:Vi-La/TeamWork-G1.git"
+  },
+  "dependencies": {
+    "@babel/cli": "^7.8.3",
+    "@babel/core": "^7.8.3",
+    "@babel/node": "^7.8.3",
+    "@babel/plugin-proposal-class-properties": "^7.8.3",
+    "@babel/polyfill": "^7.8.3",
+    "@babel/preset-env": "^7.8.3",
+    "babel-eslint": "^10.1.0",
+    "babel-node": "0.0.1-security",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "env": "0.0.2",
+    "express": "^4.17.1",
+    "express-mongo-sanitize": "^2.0.2",
+    "express-rate-limit": "^5.2.6",
+    "helmet": "^4.4.1",
+    "hpp": "^0.2.3",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.8.9",
+    "nodemailer": "^6.5.0",
+    "nodemon": "^2.0.7",
+    "validator": "^13.5.2",
+    "xss-clean": "^0.1.1"
+  },
+  "author": "Felix",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Vi-La/TeamWork-G1/issues"
+  },
+  "homepage": "https://github.com/Vi-La/TeamWork-G1#readme"
+}
