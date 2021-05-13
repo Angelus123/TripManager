@@ -4,6 +4,7 @@ import User from "../models/User";
 import catchAsync from "../utils/catchAsync"
 import comment from '../models/Comment';
 import AppError from "../utils/appError";
+import factory from './handlerFactory'
 
 const filterObj = (obj, ...allowedFields) =>{
     const newObj ={}

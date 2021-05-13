@@ -1,22 +1,23 @@
 import express from "express";
 import * as tourController from "../controllers/TourController";
-import * as authControl from "../controllers/AuthController"
-
+import * as authController from "../controllers/AuthController"
+import reviewRoute from "../routes/reviewRoute"
 
 
 const tourRoute = express.Router()
-
+tourRoute.use('/:tourId/reviews', reviewRoute)
 tourRoute.route("/")
-                   .post(authControl.protect, tourController.createTour)
-                   .get(authControl.protect, tourController.getAllTour)
+                   .post(authController.protect, 
+                    tourController.setTourAndUserId ,
+                    tourController.createTour)
+                   .get(authController.protect, tourController.getAllTour)
                 
 
 tourRoute.route('/:id')
-                   .delete(authControl.protect ,
-                    authControl.restrictTo('admin'),
+                   .delete(authController.protect ,
+                    authController.restrictTo('admin'),
                     tourController.deleteTour)
-                   .patch(authControl.protect, tourController.updateTour)
-                   .get(authControl.protect,  tourController.getTour)
-
-
+                   .patch(authController.protect, tourController.updateTour)
+                   .get(authController.protect,  tourController.getTour)
+// 
 export default tourRoute

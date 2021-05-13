@@ -1,12 +1,17 @@
 import * as ReviewController from '../controllers/RiviewController'
 import express from 'express'
-import * as AuthoController from '../controllers/AuthController'
-const reviewRoutes = express.Router()
+import * as AuthController from '../controllers/AuthController'
+
+const reviewRoutes = express.Router({mergeParams:true})
+reviewRoutes.use(AuthController.protect)
 reviewRoutes.route('/')
-            .post(AuthoController.protect,ReviewController.createReview)
-            .get(AuthoController.protect, ReviewController.getAllReview)
+            .post(
+                ReviewController.setTourAndUserId,
+                ReviewController.createReview)
+            .get( ReviewController.getAllReview)
 reviewRoutes.route('/:id')
-            .delete(AuthoController.protect,ReviewController.deleteReview)
-            .get(AuthoController.protect, ReviewController.getReview)
+            .delete(ReviewController.deleteReview)
+            .get(ReviewController.getReview)
+            .patch(ReviewController.updateReview)
 
 export default reviewRoutes

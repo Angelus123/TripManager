@@ -13,7 +13,11 @@ Here is a list of all API Endpoints that you will find:
 * GET /api/v1/user
 * DELETE /api/v1/user/:id
 * PATCH /api/v1/user/:id
+## Include Environment folder (config/config.env)
 
+PORT=3000
+NODE_ENV=development
+DATABASE1=mongodb atlas path or localhost
 ## Tour API
 * POST /api/v1/tour
 * GET /api/v1/tour
@@ -41,8 +45,7 @@ Here is a list of all API Endpoints that you will find:
 ### Additional Tools
 
 * JavaScript Es6 with Babel compiler
-* TravisCI for Continous Integration
-* nyc for test coverage
+
 
 ### Here there is important link you may visit
 
