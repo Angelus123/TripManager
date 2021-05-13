@@ -7,11 +7,13 @@ const userRouter = express.Router()
 userRouter.post('/login', AuthController.login)
 userRouter.post('/signup', AuthController.signup)
 userRouter.post('/forgotPasswor', AuthController.forgotPassword)
-userRouter.patch('/updateMyPassword', AuthController.protect, AuthController.updatePassword)
+userRouter.use(AuthController.protect)
+userRouter.patch('/updateMyPassword',AuthController.updatePassword)
 
 userRouter.patch('/resetPassword/:token', AuthController.resetPassword)
-userRouter.patch('/updateMe', AuthController.protect, UserController.updateMe)
-userRouter.delete('/deleteMe', AuthController.protect, UserController.deleteMe)
+userRouter.patch('/updateMe', UserController.updateMe)
+userRouter.delete('/deleteMe', UserController.deleteMe)
+userRouter.get('/me', UserController.getMe,UserController.getMine)
 
 userRouter.route("/")
                    
@@ -20,6 +22,5 @@ userRouter.route("/")
 
 userRouter.route('/:id')
                    .delete(UserController.deleteUser)
-                   .patch(UserController.updateUser)
                    .get(UserController.getUser)
 export default userRouter;

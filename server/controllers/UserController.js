@@ -1,36 +1,20 @@
 import User from "../models/User";
 import AppError from "../utils/appError";
 import catchAsync from "../utils/catchAsync"
-
+import factory from './handlerFactory'
 
 const filterObj = (obj, ...allowedFields) =>{
     const newObj ={}
-
     Object.keys(obj).forEach(el =>{
         if(allowedFields.includes(el)) newObj[el]= obj[el]
     })
     return newObj
 }
-export const createUser = catchAsync(async (req,res,next)=>{
-
-    const newUser = await User.create(req.body);//inpostman
-    res.status(201).json({
-        status:"success",
-        newUser
-            })
-        })
-
+export const createUser = factory.createOne(User)
     
 //Get indv controll funct ion
 
-    export const getUser = catchAsync(async(req,res,next)=>{
-        const user= await User.findById(req.params.id)
-                res.status(200).json({
-                   status:"success",
-                   user
-                
-            })
-        })
+    export const getUser = factory.getOne(User)
 
 //Update controll function
 
@@ -57,6 +41,7 @@ export const updateMe= catchAsync(async (req,res,next)=>{
 
 })
 
+
 export const deleteMe= catchAsync(async (req,res,next)=>{
 
     let _id = {_id:req.user.id}
@@ -68,37 +53,13 @@ export const deleteMe= catchAsync(async (req,res,next)=>{
     })
 })
 
-export const updateUser= catchAsync(async (req,res,next)=>{
 
-    let user= {}
-   user.firstName=req.body.firstName
-   user.lastName=req.body.lastName
-   user.phone=req.body.phone;
-   user.gender=req.body.gender;
-   user.department=req.body.department;
-   user.address=req.body.address;
-   user.email=req.body.email;
-
-    let query = {_id:req.params.id}
- 
-    const updateUser = await User.updateOne(query, user)
-            res.status(200).json({
-                status:"Updated success",  
-                updateUser 
-          })  
-       })
   //Delete controll function
-  export const deleteUser = catchAsync(async (req, res, next) => {
-
-     let query = {_id:req.params.id}
-  const user = await User.deleteOne(query)
-        res.send('Deleted Successfully')      
-    
-})
-
+  export const deleteUser = factory.deleteOne(User)
       //Get All controll function
-export const getAlluser = catchAsync(async (req,res,next) => {
-   
-    const alluser = await User.find({})
-        res.send(alluser)
-     })
+  export const getAlluser = factory.getAll(User)
+  export const getMe = catchAsync(async(req, res, next) =>{
+      req.params.id=req.user.id
+      next()
+  })
+  export const getMine = factory.getOne(User)

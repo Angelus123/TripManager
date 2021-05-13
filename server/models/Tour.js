@@ -11,6 +11,24 @@ import mongoose from "mongoose";
         type: String,
         required: true,
     },
+    ratingAverage:{
+        type: Number,
+        default:4.5,
+        set : val => Math.round(val * 10) /10
+    },
+    ratingQuantity:{
+        type: Number,
+        default:0
+    },
+    price:{
+        type: Number,
+        default:0
+    },
+    priceDiscount:{
+        type: Number,
+        default:0
+    },
+
   
     createdAt:{
         type: Date,
@@ -56,36 +74,21 @@ import mongoose from "mongoose";
     ],
   
     // guides: Array
+},{
+    toObject:{virtuals:true},
+    toJSON: {virtuals:true}
 }
 
 )
-tourSchema.virtual('review', {
+tourSchema.virtual('reviews', {
     ref:'Review',
     localField: '_id',
-    foreignField: 'tour'
+    foreignField: 'Tour'
   
 })
-tourSchema.set('toJSON',{virtuals:true})
+// tourSchema.set('toJSON', {virtuals:true})
 
-tourSchema.set('toObject', {virtuals:true})
+// tourSchema.set('toObject', {virtuals:true})
 
-// tourSchema.pre(/^find/, function(next){
-//     this.populate(
-//         {
-//             path: 'guides',
-//             select: 'firstName'
-//         }
-//     )
-//     this.populate(
-//         {
-//             path: 'authorInfo',
-           
-//         }
-//     )
-//     next()
-// })
-//Virtual Populate
-
-//let article = module.exports= mo.model('Article',artSchma);
 const Tour = mongoose.model("tour", tourSchema);
 export default Tour;
