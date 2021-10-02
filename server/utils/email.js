@@ -5,7 +5,7 @@ export const sendEmail = async options => {
     // 1) create atransporter
     // console.log(options)
     const transporter =nodemailer.createTransport({
-        host:process.env.EMAIL_HOST,
+        service:process.env.EMAIL_HOST,
         port:process.env.EMAIL_PORT,
         // service:'Gmail',
 
